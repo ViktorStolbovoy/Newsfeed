@@ -1,0 +1,42 @@
+﻿@{
+    PageData["title"] = "Newsfeed";
+}
+<div ng-app="app.controllers">
+	<h1>News</h1>
+	<div ng-controller="HomeCtrl">
+		<div class="spinner" ng-hide="loaded"><i class="fa fa-refresh fa-spin" style="font-size:24px"></i></div>
+		<div ng-cloak="" ng-show="loaded" layout="row">
+			<md-content flex="50" style="border: 1px solid firebrick;" layout="column">
+				<md-list>
+					<md-list-item ng-repeat="article in articles">
+						<div class="md-list-item-text" layout="column">
+							<h3>{{article.Body}}</h3>
+							<p><small>{{article.Published | date:'longDate'}}</small></p>
+						</div>
+					</md-list-item>
+				</md-list>
+			</md-content>
+		</div>
+		<div class="spinner" ng-show="storing"><i class="fa fa-refresh fa-spin" style="font-size:24px"></i></div>
+		<div ng-cloak="" ng-hide="storing">
+			<h2>New entry</h2>
+			<table>
+				<tr>
+					<td rowspan="2">
+						<textarea type="text" name="input" ng-model="newMessageBody" rows="4" cols="50"> </textarea>
+					</td>
+					<td>
+						<md-datepicker ng-model="newMessageDate" md-placeholder="Enter date"></md-datepicker>
+					</td>
+				</tr>
+				<tr>
+					<td align="right">
+						<button ng-click="publish()">Publish</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+
